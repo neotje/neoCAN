@@ -22,6 +22,7 @@
         "atmelsam"
     ],
     "dependencies": {
-        "external-zip": "https://github.com/adafruit/arduino-CAN/archive/refs/heads/master.zip"
+        "external-zip": "https://github.com/adafruit/arduino-CAN/archive/refs/heads/master.zip",
+        "ivanseidel/LinkedList": "0.0.0-alpha+sha.dac3874d28"
     }
 }
