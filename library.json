@@ -1,0 +1,27 @@
+{
+    "name": "neoCAN",
+    "version": "0.0.1",
+    "description": "A communication protocol for CAN based networks",
+    "keywords": [
+        "CAN",
+        "neoCAN",
+        "network",
+        "communication"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/neotje/neoCAN.git"
+    },
+    "authors": {
+        "name": "neotje"
+    },
+    "frameworks": [
+        "arduino"
+    ],
+    "platforms": [
+        "atmelsam"
+    ],
+    "dependencies": {
+        "external-zip": "https://github.com/adafruit/arduino-CAN/archive/refs/heads/master.zip"
+    }
+}
