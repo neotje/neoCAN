@@ -20,4 +20,5 @@ class NCProtocol {
         bool sendPacket(uint8_t *data, uint8_t length);
 
         virtual void onRecieve(uint8_t *data, uint8_t size) = 0;
+        virtual void onUpdate() = 0;
 };
