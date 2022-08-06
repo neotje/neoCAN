@@ -38,7 +38,7 @@ void NCDevice::loop() {
     if (size > 0 && _can->packetExtended() && getNodeIdFromCanId(_can->packetId()) == _nodeId) {
         uint16_t channel = getChannelFromCanId(_can->packetId());
 
-        // check if channel is registered
+        // check if channel is registered and call onRecieve()
         if (_protocols->find(channel) != _protocols->end()) {
             uint8_t* data = new uint8_t[size];
             _can->readBytes(data, size);
@@ -47,6 +47,10 @@ void NCDevice::loop() {
 
             delete[] data;
         }
+    }
 
+    // loop through all protocols and call onUpdate()
+    for (std::map<uint16_t, NCProtocol*>::iterator it = _protocols->begin(); it != _protocols->end(); ++it) {
+        it->second->onUpdate();
     }
 }
