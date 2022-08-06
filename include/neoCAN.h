@@ -1,3 +1,4 @@
 #pragma once
 
-#include <ncDevice.h>
+#include "ncDevice.h"
+#include "protocols/sdoProtocol.h"
