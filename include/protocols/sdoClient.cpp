@@ -21,6 +21,7 @@ bool SDOClient::sendDataRequest() {
 bool SDOClient::sendData(uint8_t* data, uint8_t size) {
     if (_state != SDOClient_t::IDLE) return false;
 
+    // send start packet
     uint8_t startPacket[2] = {
         SDO_DATA_START,
         size
@@ -49,6 +50,13 @@ bool SDOClient::sendData(uint8_t* data, uint8_t size) {
         transmitted = end;
         delete[] buffer;
     }
+
+    // send end packet
+    uint8_t endPacket[1] = {
+        SDO_DATA_END
+    };
+    if (!sendPacket(endPacket, 1)) return false;
+
     return true;
 }
 

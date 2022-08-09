@@ -60,14 +60,26 @@ private:
 
     SDOHost_t::state _state;
 
+    // recieve buffer
+    uint8_t* _buffer;
+    uint8_t _bufferSize;
+    uint8_t _currentPos;
+
+    // send buffer
+    uint8_t* _data;
+    uint8_t _dataSize;
     uint8_t _transmitted;
+
+    std::vector<void(*)(uint8_t*, uint8_t)> _callbacks;
 
 public:
     SDOHost(NCDevice* device, channel_t channel);
     ~SDOHost();
 
-    uint8_t* _data;
-    uint8_t _dataSize;
+    bool setData(uint8_t* data, uint8_t size);
+    bool sendData();
+
+    void addCallback(void(*callback)(uint8_t*, uint8_t));
 
     void onRecieve(uint8_t* data, uint8_t size);
     void onUpdate();
