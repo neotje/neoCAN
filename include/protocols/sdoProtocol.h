@@ -37,9 +37,29 @@ public:
     SDOClient(NCDevice* device, channel_t channel);
     ~SDOClient();
 
+    /**
+     * @brief Sends data request to host.
+     * 
+     * @return true 
+     * @return false 
+     */
     bool sendDataRequest();
+
+    /**
+     * @brief Send data to the host.
+     * 
+     * @param data 
+     * @param size 
+     * @return true 
+     * @return false 
+     */
     bool sendData(uint8_t* data, uint8_t size);
 
+    /**
+     * @brief Add a callback function. Callback is called on data recieved from the host.
+     * 
+     * @param callback 
+     */
     void addCallback(void(*callback)(uint8_t*, uint8_t));
 
     void onRecieve(uint8_t* data, uint8_t size);
@@ -76,7 +96,22 @@ public:
     SDOHost(NCDevice* device, channel_t channel);
     ~SDOHost();
 
+    /**
+     * @brief Set the Data object
+     * 
+     * @param data 
+     * @param size 
+     * @return true 
+     * @return false 
+     */
     bool setData(uint8_t* data, uint8_t size);
+
+    /**
+     * @brief Send data to client
+     * 
+     * @return true 
+     * @return false 
+     */
     bool sendData();
 
     void addCallback(void(*callback)(uint8_t*, uint8_t));

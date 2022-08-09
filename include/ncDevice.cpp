@@ -11,12 +11,10 @@ NCDevice::~NCDevice() {
 }
 
 bool NCDevice::registerProtocol(uint16_t channel, NCProtocol* protocol) {
-    if (channel < 1) {
-        return false;
-    }
-    if (_protocols->find(channel) != _protocols->end()) {
-        return false;
-    }
+    if (channel < 1) return false;
+
+    if (_protocols->find(channel) != _protocols->end()) return false;
+    
     _protocols->insert(std::pair<uint16_t, NCProtocol*>(channel, protocol));
     return true;
 }
