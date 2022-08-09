@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <vector>
 
 #include "protocol.h"
 
@@ -16,7 +17,8 @@ struct SDOClient_t
     enum state {
         IDLE,
         WAITING,
-        RECIEVING
+        RECIEVING,
+        SENDING,
     };
 };
 
@@ -29,11 +31,16 @@ private:
     uint8_t _dataSize;
     uint8_t _currentPos;
 
+    std::vector<void(*)(uint8_t*, uint8_t)> _callbacks;
+
 public:
     SDOClient(NCDevice* device, channel_t channel);
     ~SDOClient();
 
     bool sendDataRequest();
+    bool sendData(uint8_t* data, uint8_t size);
+
+    void addCallback(void(*callback)(uint8_t*, uint8_t));
 
     void onRecieve(uint8_t* data, uint8_t size);
     void onUpdate();
@@ -42,7 +49,8 @@ public:
 struct SDOHost_t {
     enum state {
         IDLE,
-        SEND_DATA
+        SEND_DATA,
+        RECIEVING
     };
 };
 
